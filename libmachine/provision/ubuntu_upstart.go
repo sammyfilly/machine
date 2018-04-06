@@ -76,6 +76,10 @@ func (provisioner *UbuntuProvisioner) Package(name string, action pkgaction.Pack
 	switch action {
 	case pkgaction.Install, pkgaction.Upgrade:
 		packageAction = "install"
+		if i, _ := dpkgPackageInstalled(provisioner, name); i {
+			log.Debugf("%s is already installed, skipping operation", name)
+			return nil
+		}
 	case pkgaction.Remove, pkgaction.Purge:
 		packageAction = "remove"
 		updateMetadata = false
