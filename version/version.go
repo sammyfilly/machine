@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	Version = "0.16.2"
+	Version = "0.16.2-circleci-0.1"
 
 	// GitCommit will be overwritten automatically by the build system
 	GitCommit = "HEAD"
