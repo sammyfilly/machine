@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"os/user"
 	"runtime"
 	"strconv"
 	"time"
@@ -35,17 +36,10 @@ func GetHomeDir() string {
 
 func GetUsername() string {
 	u := "unknown"
-	osUser := ""
 
-	switch runtime.GOOS {
-	case "darwin", "linux":
-		osUser = os.Getenv("USER")
-	case "windows":
-		osUser = os.Getenv("USERNAME")
-	}
-
-	if osUser != "" {
-		u = osUser
+	user, err := user.Current()
+	if err == nil {
+		u = user.Username
 	}
 
 	return u

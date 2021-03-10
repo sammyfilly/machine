@@ -3,8 +3,8 @@ package mcnutils
 import (
 	"io/ioutil"
 	"os"
+	"os/user"
 	"path/filepath"
-	"runtime"
 	"testing"
 )
 
@@ -54,17 +54,14 @@ func TestCopyFile(t *testing.T) {
 }
 
 func TestGetUsername(t *testing.T) {
-	currentUser := "unknown"
-	switch runtime.GOOS {
-	case "darwin", "linux":
-		currentUser = os.Getenv("USER")
-	case "windows":
-		currentUser = os.Getenv("USERNAME")
+	u, err := user.Current()
+	if err != nil {
+		t.Fatalf(err.Error())
 	}
 
 	username := GetUsername()
-	if username != currentUser {
-		t.Fatalf("expected username %s; received %s", currentUser, username)
+	if username != u.Username {
+		t.Fatalf("expected username %s; received %s", u.Username, username)
 	}
 }
 
