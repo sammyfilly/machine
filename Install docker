@@ -1,0 +1,146 @@
+Install Docker Desktop on Linux
+This page contains information about general system requirements, supported platforms, and instructions on how to install Docker Desktop for Linux.
+
+Important
+
+Docker Desktop on Linux runs a Virtual Machine (VM) so creates and uses a custom docker context desktop-linux on startup.
+
+This means images and containers deployed on the Linux Docker Engine (before installation) are not available in Docker Desktop for Linux.
+
+For more information see What is the difference between Docker Desktop for Linux and Docker Engine.
+Supported platforms 
+
+Docker provides .deb and .rpm packages from the following Linux distributions and architectures:
+
+Platform	x86_64 / amd64
+Ubuntu	✅
+Debian	✅
+Fedora	✅
+An experimental package is available for Arch-based distributions. Docker has not tested or verified the installation.
+
+Docker supports Docker Desktop on the current LTS release of the aforementioned distributions and the most recent version. As new versions are made available, Docker stops supporting the oldest version and supports the newest version.
+
+System requirements 
+
+To install Docker Desktop successfully, your Linux host must meet the following general requirements:
+
+64-bit kernel and CPU support for virtualization.
+KVM virtualization support. Follow the KVM virtualization support instructions to check if the KVM kernel modules are enabled and how to provide access to the KVM device.
+QEMU must be version 5.2 or later. We recommend upgrading to the latest version.
+systemd init system.
+Gnome, KDE, or MATE Desktop environment.
+For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, AppIndicatoropen_in_new.
+At least 4 GB of RAM.
+Enable configuring ID mapping in user namespaces, see File sharing.
+Recommended: Initialize pass for credentials management.
+Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see Why Docker Desktop for Linux runs a VM.
+
+Note
+
+Docker does not provide support for running Docker Desktop in nested virtualization scenarios. We recommend that you run Docker Desktop for Linux natively on supported distributions.
+KVM virtualization support 
+
+Docker Desktop runs a VM that requires KVM supportopen_in_new.
+
+The kvm module should load automatically if the host has virtualization support. To load the module manually, run:
+
+$ modprobe kvm
+Depending on the processor of the host machine, the corresponding module must be loaded:
+
+$ modprobe kvm_intel  # Intel processors
+
+$ modprobe kvm_amd    # AMD processors
+If the above commands fail, you can view the diagnostics by running:
+
+$ kvm-ok
+To check if the KVM modules are enabled, run:
+
+$ lsmod | grep kvm
+kvm_amd               167936  0
+ccp                   126976  1 kvm_amd
+kvm                  1089536  1 kvm_amd
+irqbypass              16384  1 kvm
+Set up KVM device user permissions 
+To check ownership of /dev/kvm, run :
+
+$ ls -al /dev/kvm
+Add your user to the kvm group in order to access the kvm device:
+
+$ sudo usermod -aG kvm $USER
+Sign out and sign back in so that your group membership is re-evaluated.
+
+Generic installation steps
+
+Docker Desktop terms
+
+Commercial use of Docker Desktop in larger enterprises (more than 250 employees OR more than $10 million USD in annual revenue) requires a paid subscription.
+Make sure you meet the system requirements outlined earlier and follow the distro-specific prerequisites.
+
+Download the correct package for your Linux distribution and install it with the corresponding package manager.
+Install on Debian
+Install on Fedora
+Install on Ubuntu
+Install on Arch
+Open your Applications menu in Gnome/KDE Desktop and search for Docker Desktop.
+
+Docker app in Applications
+Select Docker Desktop to start Docker.
+The Docker menu ( whale menu ) displays the Docker Subscription Service Agreement.
+
+Select Accept to continue. Docker Desktop starts after you accept the terms.
+
+Note that Docker Desktop will not run if you do not agree to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
+
+For more information, see Docker Desktop Subscription Service Agreementopen_in_new. We recommend that you also read the FAQsopen_in_new.
+
+Where to go next 
+
+Get started with Docker provides a general Docker tutorial.
+Explore Docker Desktop and all its features.
+Troubleshooting describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
+FAQs provide answers to frequently asked questions.
+Release notes lists component updates, new features, and improvements associated with Docker Desktop releases.
+Back up and restore data provides instructions on backing up and restoring data related to Docker.
+About us
+Careers
+Contact us : supportbot@microsoft.com
+Customers
+Newsletter
+Newsroom
+Swag store
+Virtual events
+What is a container?
+Why Docker?
+Developers
+Block
+Community
+Get started
+Open Source
+Preview Program
+Use cases
+Features
+Container Runtime
+Developer Tools
+Docker Desktop
+Docker Hub
+Docker Product Roadmap
+Secure Software Supply Chain
+Trusted Content
+Product offerings
+Docker Business
+Docker Personal
+Docker Pro
+Docker Team
+Docker Verified Publisher
+Partners
+Pricing FAQs
+Terms of Service
+Status
+Legal
+Copyright © 2013-2023 Docker Inc. All rights reserved.
+Cookies Settings
+Twitter
+Youtube
+GitHub
+Linkedin
+Facebook
